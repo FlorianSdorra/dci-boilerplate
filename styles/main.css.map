@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///_partial.scss","webpack:///main.scss"],"names":[],"mappings":"AAAA;EACE,+CAA0C;;ACC5C;EACE,UAAU;EADZ;IAGI,WAAW","file":"styles/main.css","sourcesContent":["h1 {\n  background-image: url('../84-536x354.jpg');\n}\n","@import '_partial';\n\nbody {\n  color: red;\n  h1 {\n    color: blue;\n  }\n}\n"],"sourceRoot":""}
