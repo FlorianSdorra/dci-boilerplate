@@ -126,7 +126,7 @@ npm run build
 Deploy your code to **Github Pages**: this script creates a 'gh-pages' branch and serve the production bundle to this branch
 
 ```
-npm deploy
+npm run deploy
 ```
 
 ## DIY Tutorial
