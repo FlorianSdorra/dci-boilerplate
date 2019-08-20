@@ -63,7 +63,7 @@ module.exports = {
       },
       // Images
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|jpg|jpeg|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -71,6 +71,20 @@ module.exports = {
               name: '[name].[ext]',
               outputPath: 'img/',
               publicPath: '../img/'
+            }
+          }
+        ]
+      },
+      // Fonts
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+              publicPath: '../fonts'
             }
           }
         ]
