@@ -5,12 +5,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/scripts/index.js',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: path.join('scripts', 'bundle.js')
   },
   module: {
     rules: [
+      // Scripts
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -21,6 +23,7 @@ module.exports = {
           }
         }
       },
+      // index.html
       {
         test: /\.html$/,
         use: [
@@ -30,9 +33,47 @@ module.exports = {
           }
         ]
       },
+      // Styles
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.css$|\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      // Images
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'img/',
+              publicPath: '../img/'
+            }
+          }
+        ]
       }
     ]
   },
