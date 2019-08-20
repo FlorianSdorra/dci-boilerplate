@@ -4,9 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
-module.exports = {
+const config = {
   entry: './src/scripts/index.js',
-  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: path.join('scripts', 'bundle.js')
@@ -20,7 +19,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            sourceMaps: true
           }
         }
       },
@@ -110,4 +110,12 @@ module.exports = {
       chunkFilename: 'styles/chunks/[id].css'
     })
   ]
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map';
+  }
+
+  return config;
 };
