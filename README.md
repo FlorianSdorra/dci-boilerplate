@@ -188,6 +188,6 @@ This folder will contain your built project, ready to be deployed online.
 
 ## Credits
 
-Boilerplate created by Leandro Frigerio (@leandro-dci)
+Boilerplate created by Leandro Frigerio ([@LeandroDCI](https://github.com/LeandroDCI))
 
-Edited by Itamar Givon (@itamargiv)
+Edited by Itamar Givon ([@itamargiv](https://github.com/itamargiv))
