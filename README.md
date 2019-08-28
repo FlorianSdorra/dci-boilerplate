@@ -1,6 +1,6 @@
 # Webpack Boilerplate
 
-A [Webpack 4](https://webpack.js.org/) boilerplate with build-in:
+A [Webpack 4](https://webpack.js.org/) boilerplate with built-in:
 
 - HTML file generation to serve your webpack bundles using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 - ECMAScript 6 to ECMAScript 5 transpiling with [babel](https://babeljs.io/)
@@ -9,46 +9,16 @@ A [Webpack 4](https://webpack.js.org/) boilerplate with build-in:
 - Image and font imports with [file-loader](https://github.com/webpack-contrib/file-loader)
 - Github Pages publishing using [gh-pages](https://www.npmjs.com/package/gh-pages)
 
+To learn more about webpack and how to create your own configuration, check out the following tutorial for a quick start: https://auth0.com/blog/zero-config-javascript-app-prototyping-with-webpack
+
+For more advanced webpacking, check out this cool book: https://survivejs.com/webpack/introduction/
+
 ## Get Started
 
-- [Project Structure](#project-structure)
-- [Commands](#commands)
-  - [Development](#development)
-  - [Production](#production)
-  - [Deploy to Github Pages](#deploy-to-github-pages)
 - [Setup](#setup)
-  - [Quick setup](#quick-setup)
-  - [Complete setup](#complete-setup)
-    - [Create your package.json and customize it](#create-your-packagejson-and-customize-it)
-    - [Install Webpack](#install-webpack)
-    - [Create files](#create-files)
-    - [Add HTML to your generated Bundle](#add-html-to-your-generated-bundle)
-    - [Transplate your JS with Babel](#transplate-your-js-with-babel)
-    - [Styling: import and inject CSS](#styling-import-and-inject-css)
-    - [Import images](#import-images)
-    - [Optimize CSS and Javascript assets](#optimize-css-and-javascript-assets)
-    - [Use Bootstrap](#use-bootstrap)
-    - [Use FontAwesome](#use-fontawesome)
-    - [Deploy to Github Pages](#deploy-to-github-pages)
-    - [Use aliases](use-aliases)
-    - [Use BrowserSync](use-brosersync)
-
-## Project Structure
-
-```
-Project
-│   README.md
-│   package.json
-│   webpack.config.js
-└───src
-│   │   index.html
-│   └───scripts
-│   |   └───index.js
-│   └───scss
-│       └───main.scss
-└───dist
-
-```
+- [Useful Commands](#useful-commands)
+- [Project Structure](#project-structure)
+- [Credits](#credits)
 
 ## Setup
 
@@ -123,549 +93,101 @@ npm run build
 
 ### Deploy to Github Pages
 
-Deploy your code to **Github Pages**: this script creates a 'gh-pages' branch and serve the production bundle to this branch
+Deploy your code to **Github Pages**: this script creates a 'gh-pages' branch and serves the production bundle to this branch. For this to work,make sure you already have a remote repo on github.
 
 ```
 npm run deploy
 ```
 
-## DIY Tutorial
+## Project Structure
 
-The following sections will guide you in configuring your own boilerplate from scratch.
-
-### Create your package.json and customize it
+Any project created with this boilerplate will follow the structure below:
 
 ```
-
-npm init
-
+Project
+│   README.md
+│   package.json
+|   package-lock.json
+│   webpack.config.js
+└───src
+│   │   index.html
+│   └───scripts
+│   |   └───index.js
+│   └───styles
+│   |   └───main.scss
+|   └───images
+|   └───fonts
+└───dist
 ```
 
-### Initialize Webpack
+### `README.md`
 
-1. Install Webpack
+Should contain a brief description of your project, feel free to delete this guide or rename it to add your own description.
 
-   ```
-   npm i -D webpack webpack-cli webpack-dev-server
-   ```
+### `package.json` & `package-lock.json`
 
-1. Setup your development scripts in `package.json`
+These files contain various information about you, your project and the project dependencies, as well as useful scripts to help you with the development process.
 
-   ```json
-   {
-     ...
-     "scripts": {
-     "start": "webpack-dev-server --mode development",
-     "build": "webpack --mode production",
-     }
-     ...
-   }
-   ```
+### `webpack.config.js`
 
-1. Create a basic configuration file in `webpack.config.js`
+Contains configuration for the webpack package bundler. this file tells webpack how to handle thw various types of files your project might contain. if you muse edit this file, do so **with caution**.
 
-   ```javascript
-   const path = require('path');
+### `src` & `index.html`
 
-   const config = {
-     entry: './src/scripts/index.js',
-     output: {
-       path: path.resolve(__dirname, 'dist/'),
-       filename: path.join('scripts', 'bundle.js')
-     }
-   };
+The `src` folder contains any file you would want to add to your project, before any processing is done to it. **This is the main folder you will be working in**.
 
-   module.exports = config;
-   ```
+`index.html` is a template to quickly bootstrap your project, so that all js and css files will be automatically added to it. In the webpack workflow, you will not need to add any new html pages to your project, instead your main entry point to the code will be your main javascript file.
 
-### Test it out
+### `scripts` & `index.js`
 
-1. Create a file in `src/scripts/index.js` and insert some starting JS code there.
+The `scripts` folder will contain any `js` modules you will add to your project. In order to include these javascript modules in your project, they need to be imported into `index.js`
 
-   ```javascript
-   let message = 'Hello Webpack';
-   console.log(` Message is: ${message}`);
-   ```
+`index.js` is the _**entry point**_ of your project. This means that any module imported to this file can be used, and any code in this file will be executed when the browser loads the page. This is the file where you will initially make all the dom manipulations necessary to render your page.
 
-1. Run the dev server and open a browser window on `localhost:8080`
+### `styles` & `main.scss`
 
-   ```
-   npm start
-   ```
+The `styles` folder will contain any `scss` or `css` files (depending on your preference). In order to include additional styles in your project you must import them to `main.scss`.
 
-   You **should** see the message when you open the console.
+`main.scss` is your style _**entry point**_. Any other `scss` or `css` imported to this file can be used, and any styles written directly to this file will be applied.
 
-### Transpile your ESNext with Babel
+If you prefer to work just with pure css, simply rename this file to `main.css`. Keep in mind that if you don't use `scss` each stylesheet you import will make an additional request to the server, which might have an impact on page performance.
 
-1. Install [Babel](https://babeljs.io/) to transpile your code down to ES5
+### `images` and `fonts`
 
-   ```
-   npm i -D @babel/core babel-loader @babel/preset-env
-   ```
-
-1. Add the following configuration to your `webpack.config.js`
-
-   ```javascript
-   //...
-
-   const config = {
-     //...
-     module: {
-       rules: [
-         // Scripts
-         {
-           test: /\.js$/,
-           exclude: /node_modules/,
-           use: {
-             loader: 'babel-loader',
-             options: {
-               presets: ['@babel/preset-env'],
-               sourceMaps: true
-             }
-           }
-         }
-       ]
-     }
-   };
-
-   //...
-   ```
-
-### Test it out
-
-1. Run the build script
-
-
-    ```
-    npm run build
-    ```
-
-    You **should** see a javascript file in `dist/scripts/bundle.js`
-
-### Add HTML to your generated Bundle
-
-1. Install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to generate an `index.html`
-
-   ```
-   npm i -D html-webpack-plugin html-loader
-   ```
-
-1. Create a basic template for your HTML page in `src/index.html`
-
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-       <title>[project title]</title>
-     </head>
-     <body>
-       <h1>Hello from src</h1>
-     </body>
-   </html>
-   ```
-
-1. Add the following configuration to your `webpack.config.js`
-
-   ```javascript
-   //at the beginning of the file
-   const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-   module.exports = {
-     //...
-     module: {
-       rules: [
-        // Scripts
-        {
-          //...
-        },
-        // index.html
-        {
-          test: /\.html$/,
-          use: [
-            {
-              loader: 'html-loader',
-              options: { minimize: true }
-            }
-          ]
-        }
-      ]
-     },
-     plugins: [
-        new HtmlWebpackPlugin({
-          template: 'index.html',
-          filename: './index.html'
-        })
-      ];
-    }
-   ```
-
-#### Test it out
-
-1. Run the build script
-
-
-    ```
-    npm run build
-    ```
-
-    You **should** see an html file file in `dist/index.html`
-
-1. Open `dist/index.html` in the browser
-
-   You **should** see the heading you added to the template displayed on the page.
-
-   You **should** see the message from the js file when you open the console.
-
-### Adding some style
-
-### Working with Images and Fonts
-
-### Source maps and production
-
-### Supporting GithubPages Deployment
-
-### Bonus Tasks: Bootstrap and Fontawesome
-
----
-
-### Create starter files
-
-1. Create a file in **/src/scripts/index.js** and insert some starting JS code there.
-
-   ```javascript
-   let message = 'Hello Webpack';
-   console.log(` Message is: ${message}`);
-   ```
-
-1. Create a file in **/src/styles/main.scss** and insert some starting SCSS styles there.
-
-   ```scss
-   $font-stack: Helvetica, sans-serif;
-   $primary-color: #bb2b2b;
-
-   body {
-     font: 100% $font-stack;
-     color: $primary-color;
-     text-align: center;
-   }
-
-   img {
-     max-width: 500px;
-   }
-   ```
-
-1. Add a `logo.png` image in **/src/img/logo.png**
-
-#### Styling: import and inject CSS
-
-To import and use CSS styles we need to add a [style-loader](https://github.com/webpack-contrib/style-loader) and [css-loader](https://github.com/webpack-contrib/css-loader). Css-loader will import content to a variable and style-loader will inject content into the HTML file as an inline tag. To support SCSS we also need to add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [node-sass](https://github.com/sass/node-sass).
-
-```
-npm i -D style-loader css-loader sass-loader node-sass
-```
-
-and add the configuration for the loaders to your **webpack.config.js**
+To include images in your scripts or styles, place you image files in the `images` folder, and simply import them into your script:
 
 ```javascript
-// in the configuration -> module -> rules
+import cutePuppyJpeg from '../images/cute-puppy.jpg';
 
-    //style and css loader
-    {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader", 'sass-loader']
-    }
+const someImage = document.createElement('img');
 
+someImage.src = cutePuppyJpeg;
 ```
 
-Extracting all CSS into a single file
+**OR** to include them in your style:
 
-Styles are now injected as an inline. We will extract styles using [css-mini-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) and we'll move the styles to an external stylesheet file.
-This stylesheet will be then injected into the index.html automatically.
-
-```
-npm i -D mini-css-extract-plugin
-```
-
-and add the configuration for css-mini-extract-plugin to your **webpack.config.js**
-
-```javascript
-
-// at the beginning of the file
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// in the configuration -> module -> rules
-      {
-        test: [/.css$|.scss$/],
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader"
-        ]
-      }
-
-// in the configuration -> plugins
-
-module.exports = {
-
-...
-
-  plugins: [
-    ...
-    new MiniCssExtractPlugin({
-      filename: "assets/css/styles.css"
-    }),
-    ...
-  ]
-```
-
-#### Import images
-
-To include images we need to configure [file-loader](https://github.com/webpack-contrib/file-loader)
-
-```
-npm i -D file-loader
-```
-
-and add the configuration for file-loader to your **webpack.config.js**
-
-```javascript
-// in the configuration -> module -> rules
-
-    //file loader
-    {
-        test: /\.(png|jpg|gif|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/'
-            }
-          }
-        ]
-    }
-
-```
-
-#### Optimize CSS and Javascript assets
-
-We want to optimize the webapp by minifying our assets with [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) and [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin).
-Note: Webpack 4 optimizes JS bundle by default when using **production** mode.
-
-```
-npm i -D uglifyjs-webpack-plugin optimize-css-assets-webpack-plugin
-```
-
-and add the configuration to your **webpack.config.js**
-
-```javascript
-// at the beginning of the file
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
-// in the configuration -> optimization
-
-module.exports = {
-...
-
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin(),
-      new OptimizeCSSAssetsPlugin()
-    ]
-  },
-
-```
-
-#### Use Bootstrap
-
-For Bootstrap to compile, we need to you install and use the required loaders: postcss-loader with autoprefixer.
-
-```
-npm i -D postcss-loader autoprefixer
-```
-
-and add the configuration to your **webpack.config.js**
-
-```javascript
-
-
-// in the configuration -> module -> rules change
-
-      //style and css extract
-      {
-        test: [/.css$|.scss$/],
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", {
-          loader: 'postcss-loader',
-          options: {
-            plugins: () => [require('autoprefixer')({
-              'browsers': ['> 1%', 'last 2 versions']
-            })],
-          }
-        }]
-      },
-
-```
-
-We can now install Bootstrap module
-
-```
-npm i bootstrap @fortawesome/fontawesome-free
-```
-
-In **/src/assets/js/index.js** import Bootstrap
-
-```javascript
-...
-import 'bootstrap';
-...
-
-```
-
-In **/src/assets/styles/styles.scss** import Bootstrap
-
-```scss
-...
-@import "custom";
-@import "~bootstrap/scss/bootstrap";
-...
-
-```
-
-Create a new file In **/src/assets/styles/custom.scss** and move your style there
-
-```scss
-$theme-colors: (
-  'primary': #666969
-);
-
-$font-stack: Helvetica, sans-serif;
-
-body {
-  font: 100% $font-stack;
-  color: $primary-color;
-  text-align: center;
-}
-
-img {
-  max-width: 500px;
+```css
+.cute-puppy {
+  background-image: url('../images/cute-puppy.jpg');
 }
 ```
 
-#### Use Fontawesome
+> _**NOTE**_: Don't forget to replace the cute puppy with the actual name of the image you are trying to add.
 
-Install fontawesome
+The `fonts` folder should include any custom font files you would like to add to your project. To use the font simply import it into your `main.scss` file.
 
-```
-npm i @fortawesome/fontawesome-free
-```
+### `dist`
 
-````
-In  **/src/assets/styles/styles.scss** set the path and import FA
+The `dist` folder will be automatically generated by webpack whenever your run the build script:
 
-```scss
-...
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
-...
-
-````
-
-and add the configuration to your **webpack.config.js**
-
-```javascript
-
-// in the configuration -> module -> rules
-
-      //fonts
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'assets/fonts/',
-            publicPath: '../fonts'
-          }
-        }]
-      },
-
+```bash
+npm run build
 ```
 
-#### Deploy to Github Pages
+This folder will contain your built project, ready to be deployed online.
 
-We want to publish files to a new branch (called gh-pages) on GitHub using the [gh-pages](https://www.npmjs.com/package/gh-pages) module.
+## Credits
 
-```
-npm i -D gh-pages
-```
+Boilerplate created by Leandro Frigerio (@leandro-dci)
 
-In **package.json** scripts add
-
-```javascript
-  "deploy": "npm run build && gh-pages -d dist",
-```
-
-This script help us to create a **gh-pages** branch on Github and also serve our bundled files on that branch.
-
-#### Use Aliases
-
-Using alias we'll simplify the imports.
-Add the configuration to your **webpack.config.js**
-
-```javascript
-resolve: {
-    alias: {
-      '@scss': path.resolve(__dirname, 'src/assets/scss'),
-      '@img': path.resolve(__dirname, 'src/assets/img'),
-      '@': path.resolve(__dirname, 'src')
-    }
-  }
-```
-
-Edit **/src/assets/js/index.js** and change
-
-```javascript
-import '@scss/styles.scss';
-import logoImg from '@img/logo.png';
-
-let filename = logoImg.substring(logoImg.lastIndexOf('/') + 1);
-logo.src = `assets/img/${filename}`;
-```
-
-#### Use BrowserSync
-
-BrowserSync will start only when you run Webpack in watch mode.
-
-```javascript
-npm i -D browser-sync-webpack-plugin browser-sync
-```
-
-and add the configuration to your **webpack.config.js**
-
-```javascript
-//at the beginning of the file
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-
-//in the configuration -> plugins
-plugins: [
-  ...new BrowserSyncPlugin({
-    host: 'localhost',
-    port: 3000,
-    server: { baseDir: ['dist'] }
-  })
-];
-```
-
----
-
-### Credits
-
-Quality metadata badges from [shields.io](https://shields.io)  
-Background image from [thepatternlibrary](http://thepatternlibrary.com/#fancy-pants)
+Edited by Itamar Givon (@itamargiv)
