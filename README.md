@@ -93,7 +93,7 @@ npm run build
 
 ### Deploy to Github Pages
 
-Deploy your code to **Github Pages**: this script creates a 'gh-pages' branch and serves the production bundle to this branch. For this to work,make sure you already have a remote repo on github.
+Deploy your code to **Github Pages**: this script creates a 'gh-pages' branch and serves the production bundle to this branch. For this to work, make sure you already have a remote repo on github.
 
 ```
 npm run deploy
@@ -130,17 +130,17 @@ These files contain various information about you, your project and the project 
 
 ### `webpack.config.js`
 
-Contains configuration for the webpack package bundler. this file tells webpack how to handle thw various types of files your project might contain. if you muse edit this file, do so **with caution**.
+Contains configuration for the webpack package bundler. This file tells webpack how to handle thw various types of files your project might contain. If you must edit this file, do so **with caution**.
 
 ### `src` & `index.html`
 
 The `src` folder contains any file you would want to add to your project, before any processing is done to it. **This is the main folder you will be working in**.
 
-`index.html` is a template to quickly bootstrap your project, so that all js and css files will be automatically added to it. In the webpack workflow, you will not need to add any new html pages to your project, instead your main entry point to the code will be your main javascript file.
+`index.html` is a template to quickly bootstrap your project so that all js and css files will be automatically added to it. In the webpack workflow, you will not need to add any new html pages to your project, instead your main entry point to the code will be your main javascript file.
 
 ### `scripts` & `index.js`
 
-The `scripts` folder will contain any `js` modules you will add to your project. In order to include these javascript modules in your project, they need to be imported into `index.js`
+The `scripts` folder will contain any `js` modules you will add to your project. In order to include these javascript modules in your project, they need to be imported into `index.js`.
 
 `index.js` is the _**entry point**_ of your project. This means that any module imported to this file can be used, and any code in this file will be executed when the browser loads the page. This is the file where you will initially make all the dom manipulations necessary to render your page.
 
@@ -154,7 +154,7 @@ If you prefer to work just with pure css, simply rename this file to `main.css`.
 
 ### `images` and `fonts`
 
-To include images in your scripts or styles, place you image files in the `images` folder, and simply import them into your script:
+To include images in your scripts or styles, place your image files in the `images` folder, and simply import them into your script:
 
 ```javascript
 import cutePuppyJpeg from '../images/cute-puppy.jpg';
