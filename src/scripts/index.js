@@ -1,4 +1,7 @@
+// The following line makes sure your styles are included in the project. Don't remove this.
 import '../styles/main.scss';
+// Import any additional modules you want to include below \/
 
-let message = 'Hi Webpack!!';
-console.log(`message is ${message}`);
+
+// \/ All of your javascript should go here \/
+
