@@ -190,4 +190,4 @@ This folder will contain your built project, ready to be deployed online.
 
 Boilerplate created by Leandro Frigerio ([@LeandroDCI](https://github.com/LeandroDCI))
 
-Edited by Itamar Givon ([@itamargiv](https://github.com/itamargiv))
+Edited by Itamar Givon ([@itamargiv](https://github.com/itamargiv)) and Francesca Borg ([@FranBTE](https://github.com/FranBTE))
