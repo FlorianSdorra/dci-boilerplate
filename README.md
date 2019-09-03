@@ -1,4 +1,4 @@
-# Webpack Boilerplate
+# DCI Boilerplate II: Webpack + babel
 
 A [Webpack 4](https://webpack.js.org/) boilerplate with built-in:
 
